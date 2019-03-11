@@ -1,5 +1,5 @@
 # kvs
-Key value storage with secondary indexes
+Fast key value storage with secondary indexes
 
 
 # Usage
@@ -9,7 +9,7 @@ const Kvs = require('./index')
 
 const db = new Kvs({
   primaryKey: "userId",
-  indexes: ["firstName","lastName", "age"]
+  indexes: ["firstName", "lastName", "age"]
 });
 
 for (let i = 0; i < 10; i++) {
