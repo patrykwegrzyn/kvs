@@ -1,0 +1,27 @@
+{
+  "name": "kvs",
+  "version": "0.0.1",
+  "description": "Key value storage with secondary indexes",
+  "main": "index.js",
+  "dependencies": {
+    "metrohash": "^2.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nope"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrykwegrzyn/kvs.git"
+  },
+  "keywords": [
+    "javascript",
+    "kvs"
+  ],
+  "author": "Patryk Wegrzyn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patrykwegrzyn/kvs/issues"
+  },
+  "homepage": "https://github.com/patrykwegrzyn/kvs#readme"
+}
