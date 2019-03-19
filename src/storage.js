@@ -20,6 +20,11 @@ class Storage {
     return hash(this.primaryKey + pkValue)
   }
 
+  findOne(key, value) {
+    const idxHash =  hash(key + value);
+    return this.indexes.get(idxHash)[0] || {};
+  }
+
   find(record) {
     const records = []
     loop(record, (k, v, idxHash) => {
@@ -59,7 +64,7 @@ class Storage {
 
   createIndexes(pkHash, record) {
     loop(record, (key, value, idxHash) => {
-      if (key !== this.primaryKey) {
+      if (key !== this.primaryKey && this.indexWith.includes(key)) {
         this.addIndex(idxHash, record, pkHash)
       }
     })
