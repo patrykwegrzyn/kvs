@@ -22,7 +22,8 @@ class Storage {
 
   findOne(key, value) {
     const idxHash =  hash(key + value);
-    return this.indexes.get(idxHash)[0] || {};
+   // console.log(idxHash, key, value, this.indexes.get(idxHash))
+    return (this.indexes.get(idxHash) || [])[0] || {};
   }
 
   find(record) {
@@ -47,6 +48,7 @@ class Storage {
   }
 
   delete(pkValue) {
+
     const pkHash = this.primaryHash(pkValue)
     const record = this.records.get(pkHash)
     const indexes = this.indexStore.get(pkHash)
@@ -54,11 +56,14 @@ class Storage {
     indexes.forEach(index => {
       const oldRecords = this.indexes.get(index)
       const newRecords = oldRecords.filter(r => r !== record)
+      if(newRecords.length === 0 ) {
+        return this.indexes.delete(index)
+      } 
       this.indexes.set(index, newRecords)
     })
 
-    this.records.delete(h)
-    this.indexStore.delete(h)
+    this.records.delete(pkHash)
+    this.indexStore.delete(pkHash)
 
   }
 
@@ -73,6 +78,7 @@ class Storage {
   addIndex(idxHash, record, pkHash) {
     if (this.indexes.has(idxHash)) {
       this.indexes.get(idxHash).push(record)
+      this.indexStore.put(pkHash, idxHash)
       return
     }
 

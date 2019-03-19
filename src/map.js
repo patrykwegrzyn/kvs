@@ -5,8 +5,10 @@ class Mappy {
   }
 
   set(key, value) {
+    if(!this.has(key))
+      this.size++
+
     this.data[key] = value;
-    this.size++
   }
 
   has(key) {
