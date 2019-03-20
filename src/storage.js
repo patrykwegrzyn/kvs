@@ -51,6 +51,8 @@ class Storage {
 
     const pkHash = this.primaryHash(pkValue)
     const record = this.records.get(pkHash)
+    if(!record) return;
+    
     const indexes = this.indexStore.get(pkHash)
 
     indexes.forEach(index => {
