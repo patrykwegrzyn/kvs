@@ -29,7 +29,7 @@ class Storage {
   find(record) {
     const records = []
     loop(record, (k, v, idxHash) => {
-      records.push(...this.indexes.get(idxHash));
+      records.push(...this.indexes.get(idxHash)||[]);
     })
 
     return records
@@ -52,7 +52,7 @@ class Storage {
     const pkHash = this.primaryHash(pkValue)
     const record = this.records.get(pkHash)
     if(!record) return;
-    
+
     const indexes = this.indexStore.get(pkHash)
 
     indexes.forEach(index => {
